@@ -4,20 +4,10 @@ Az elektronikus jegyzet elérhetősége: [Ferenci Tamás: A valószínűségszá
 
 Közvetlenül is letölthető [PDF formátumban](https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika/raw/main/docs/ferenci-tamas-valoszinusegszamitas-statisztika.pdf) valamint [EPUB formátumban](https://github.com/ferenci-tamas/ferenci-tamas/valoszinusegszamitas-statisztika/raw/main/docs/ferenci-tamas-valoszinusegszamitas-statisztika.epub).
 
-# Oktatási segédanyagok
+## Forráskód
 
-## Diasorok
+Az anyag teljes forráskódja elérhető a [https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika](https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika) címen (ez tartalmazza az anyagba beágyazott interaktív demonstrációk forráskódját is).
 
-Az anyag vázlatát tartalmazó diasor letölthetőek (nyomtatható formátumban, a diákon nincs animáció): [FerenciTamas_AValoszinusegszamitasEsAStatisztikaAlapvonalai_handout.pdf](https://github.com/tamas-ferenci/FerenciTamas_AValoszinusegszamitasEsAStatisztikaAlapvonalai/raw/main/docs/FerenciTamas_AValoszinusegszamitasEsAStatisztikaAlapvonalai_handout.pdf).
+## Technikai megjegyzések
 
-## Demonstrációk közvetlen elérhetősége
-
-Az anyagban szereplő interaktív demonstrációk közvetlen elérhetősége:
-
-- [Likelihood](https://research.physcon.uni-obuda.hu/Likelihood/)
-- [Bayes-becslés](https://research.physcon.uni-obuda.hu/BayesBecsles/)
-- [Deduktív statisztika](https://research.physcon.uni-obuda.hu/Deduktiv/)
-
-# Technikai megjegyzések
-
-Az anyag a `quarto` csomag használatával készült, az interaktív demonstrációk pedig `shiny` segítségével. A fenti repozitóriumban elérhető a teljes forráskód.
+Az anyag a `quarto` csomag használatával készült, az interaktív demonstrációk pedig `shiny` segítségével.
