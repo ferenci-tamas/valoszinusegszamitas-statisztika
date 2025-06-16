@@ -87,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar floating slimcontent quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -209,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="toc-actions"><ul><li><a href="https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Az oldal szerkesztése</a></li><li><a href="https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>Forráskód megtekintése</a></li><li><a href="https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika/issues/new" class="toc-action"><i class="bi empty"></i>Észrevétel jelzése</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -247,7 +247,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="előszó" class="level1 unnumbered page-columns page-full">
+<section id="előszó" class="level1 unnumbered">
 <h1 class="unnumbered">Előszó</h1>
 <div style="text-align: right;border-bottom: 1px solid black; width: 35%;margin-left:auto; margin-right:0">
 Ez a visszavezetés a lényege a […] megoldásnak, nem a képlet.
@@ -256,11 +256,11 @@ Ez a visszavezetés a lényege a […] megoldásnak, nem a képlet.
 <i>Péter Rózsa</i>
 </div>
 <p><br></p>
-<div class="page-columns page-full"><p> Ez a jegyzet egy kísérlet. Kísérlet arra, hogy a valószínűségszámítás és a statisztika alapjait elmagyarázza, de a nélkül, hogy ehhez matematikai formalizmust használna. Nem lesznek benne tételek, levezetések, bizonyítások, sőt, még a szimbolikus jelölések bevezetését is igyekeztem a lehető legszükségesebbre korlátozni.</p><div class="no-row-height column-margin column-container"><span class="">A valószínűségszámítást matematikai formalizmus nélkül fogjuk tárgyalni</span></div></div>
-<div class="page-columns page-full"><p> Mi motiválja ezt a kísérletet? A valószínűségszámítás és a statisztika szokásos egyetemi tárgyalása matematikailag formalizált. Hol mélyebb apparátust használ, hol világosabbat, de mindenesetre végig matematizált. Ami, félreértés ne essék, teljesen érthető, hiszen mind a valószínűségszámításnak, mind a statisztikának a korszerű felépítése csakugyan jól formalizált, és ez elengedhetetlenül szükséges is a bonyolultabb koncepciók bevezetésével és tárgyalásához.</p><div class="no-row-height column-margin column-container"><span class="">A formalizálás kell a mélyebb tárgyaláshoz, azonban sok hallgató (orvosok, szociológusok stb.) számára ezek a részek úgysem fontosak</span></div></div>
-<div class="page-columns page-full"><p> A tapasztalatom azonban az, hogy rengeteg olyan hallgató van, orvostanhallgatók, szociológusok, biológusok, akik abba a furcsa helyzetbe kerülnek, hogy egyfelől a matematikai formalizmusra sem szükségük nincsen, sem kézbentartani nem tudják, de másfelől borzasztó fontos lenne, hogy az alapgondolatokat jól megértsék. Úgy érzem, hogy a matematizált tárgyalás az esetükben egy rossz kompromisszumot köt: azért, hogy a bonyolultabb dolgok is elmondhatóak legyenek (mert ahhoz tényleg kell a matematikai formalizmus, nem kérdés!), az egyszerűbbeket is úgy mondja el, hogy nem értik meg azok, akiknek a bonyolultabbakra nincs szükségük. De miért ne mondjuk inkább ez az egyszerűbbeket formalizáltság nélkül? Igen, így a bonyolultabbakat nem lehet elmondani, de ha egyszer ezekre úgysem lesz szükségük (illetve az érdeklődők úgyis el tudják sajátítani)…? Nem lenne jobb kompromisszum feláldozni a bonyolultabb dolgokat cserében azért, hogy az egyszerűek jobban érthetőek legyenek? Hiszek ugyanis abban, hogy a valószínűségszámítás és a statisztika alapjait – amik sok szakmában az igazán fontosak! – igenis el lehet mondani matematikai formalizmus nélkül is érthetően, világosan.</p><div class="no-row-height column-margin column-container"><span class="">Viszont a matematikai formalizmus azt is megnehezíti, hogy az alapkérdéseket megértsék</span></div></div>
+<p>Ez a jegyzet egy kísérlet. Kísérlet arra, hogy a valószínűségszámítás és a statisztika alapjait elmagyarázza, de a nélkül, hogy ehhez matematikai formalizmust használna. Nem lesznek benne tételek, levezetések, bizonyítások, sőt, még a szimbolikus jelölések bevezetését is igyekeztem a lehető legszükségesebbre korlátozni.</p>
+<p>Mi motiválja ezt a kísérletet? A valószínűségszámítás és a statisztika szokásos egyetemi tárgyalása matematikailag formalizált. Hol mélyebb apparátust használ, hol világosabbat, de mindenesetre végig matematizált. Ami, félreértés ne essék, teljesen érthető, hiszen mind a valószínűségszámításnak, mind a statisztikának a korszerű felépítése csakugyan jól formalizált, és ez elengedhetetlenül szükséges is a bonyolultabb koncepciók bevezetésével és tárgyalásához.</p>
+<p>A tapasztalatom azonban az, hogy rengeteg olyan hallgató van, orvostanhallgatók, szociológusok, biológusok, akik abba a furcsa helyzetbe kerülnek, hogy egyfelől a matematikai formalizmusra sem szükségük nincsen, sem kézbentartani nem tudják, de másfelől borzasztó fontos lenne, hogy az alapgondolatokat jól megértsék. Úgy érzem, hogy a matematizált tárgyalás az esetükben egy rossz kompromisszumot köt: azért, hogy a bonyolultabb dolgok is elmondhatóak legyenek (mert ahhoz tényleg kell a matematikai formalizmus, nem kérdés!), az egyszerűbbeket is úgy mondja el, hogy nem értik meg azok, akiknek a bonyolultabbakra nincs szükségük. De miért ne mondjuk inkább ez az egyszerűbbeket formalizáltság nélkül? Igen, így a bonyolultabbakat nem lehet elmondani, de ha egyszer ezekre úgysem lesz szükségük (illetve az érdeklődők úgyis el tudják sajátítani)…? Nem lenne jobb kompromisszum feláldozni a bonyolultabb dolgokat cserében azért, hogy az egyszerűek jobban érthetőek legyenek? Hiszek ugyanis abban, hogy a valószínűségszámítás és a statisztika alapjait – amik sok szakmában az igazán fontosak! – igenis el lehet mondani matematikai formalizmus nélkül is érthetően, világosan.</p>
 <p>A cél elérése érdekében igyekszem sokkal nagyobb figyelmet szentelni annak, hogy az alapgondolatok jól követhetőek legyenek, több oldalról körüljárni őket, megmutatni az alkalmazásaikat, példát hozni, ahol lehet szimulációkat végezni, sőt, a jegyzet webes változatában interaktív vizualizációkat is mutatni.</p>
-<div class="page-columns page-full"><p> Az olvasó a kísérlet eredményét a jegyzet végére megítélheti. Én mindenesetre – különösen azért, mert ez egy kísérlet – minden visszajelzést, véleményt, kritikát a lehető legnagyobb örömmel veszek; az elérhetőségeim megtalálhatóak a <a href="https://www.medstat.hu/">https://www.medstat.hu/</a> honlapon</p><div class="no-row-height column-margin column-container"><span class="">Minden visszajelzést örömmel veszek; elérhetőségeim megtalálhatóak a <a href="https://www.medstat.hu/">https://www.medstat.hu/</a> honlapon</span></div></div>
+<p>Az olvasó a kísérlet eredményét a jegyzet végére megítélheti. Én mindenesetre – különösen azért, mert ez egy kísérlet – minden visszajelzést, véleményt, kritikát a lehető legnagyobb örömmel veszek; az elérhetőségeim megtalálhatóak a <a href="https://www.medstat.hu/">https://www.medstat.hu/</a> honlapon</p>
 <p>A jegyzet weboldala (oktatási segédanyagokkal, technikai információkkal) a <a href="https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika">https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika</a> címen érhető el.</p>
 
 
