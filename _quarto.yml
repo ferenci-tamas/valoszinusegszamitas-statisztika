@@ -1,0 +1,76 @@
+project:
+  type: book
+  output-dir: docs
+  
+lang: hu-HU
+language: _language-hu.yml
+
+filters:
+  - pandoc-quotes.lua
+  - shinylive
+  
+execute:
+  echo: false
+
+book:
+  title: "A valószínűségszámítás és a statisztika alapvonalai"
+  author:
+    - name:
+        given: Tamás
+        family: Ferenci
+        literal: Ferenci Tamás
+      email: tamas.ferenci@medstat.hu
+      url: https://www.medstat.hu/
+  date: today
+  date-format: "YYYY. MMMM D."
+  downloads: [pdf, epub]
+  sharing: [twitter, facebook, linkedin]
+  favicon: cover.png
+  image: cover.png
+  image-alt: "Cover image"
+  open-graph: true
+  twitter-card: true
+  site-url: https://ferenci-tamas.github.io/valoszinusegszamitas-statisztika
+  repo-url: https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika
+  repo-actions: [edit, source, issue]
+  description: "Ez a jegyzet a valószínűségszámítás és a statisztika alapjait igyekszik bemutatni, képletek, levezetések, matematikai formalizmusok nélkül. Azok számára, akiknek a matematikai formalizmus nem kell, de az alapgondolatokat szeretnék jól érteni."
+  language: hu-HU
+  output-file: "ferenci-tamas-valoszinusegszamitas-statisztika"
+  chapters:
+    - index.qmd
+    - valoszinusegszamitas.qmd
+    - kovetkezteto-statisztika.qmd
+    - bizonytalansag.qmd
+    - modszertan.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    include-after-body:
+      text: |
+        <script type="text/javascript">
+        var sc_project=12422840; 
+        var sc_invisible=1; 
+        var sc_security="d32cce24"; 
+        </script>
+        <script type="text/javascript"
+        src="https://www.statcounter.com/counter/counter.js"
+        async></script>
+        <noscript><div class="statcounter"><a title="ingyenes
+        webstatisztika" href="https://www.statcounter.hu/"
+        target="_blank"><img class="statcounter"
+        src="https://c.statcounter.com/12422840/0/d32cce24/1/"
+        alt="ingyenes webstatisztika"
+        referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+  pdf:
+    documentclass: scrreprt
+    links-as-notes: true
+    mainfont: XITS
+    mathfont: XITS Math
+    include-in-header:
+      - text: |
+          \usepackage{epigraph}
+  epub:
+    cover-image: cover.png
