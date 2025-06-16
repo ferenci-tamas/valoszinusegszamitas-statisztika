@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="hu-HU" xml:lang="hu-HU"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Ez a jegyzet a valószínűségszámítás és a statisztika alapjait igyekszik bemutatni, képletek, levezetések, matematikai formalizmusok nélkül. Azok számára, akiknek a matematikai formalizmus nem kell, de az alapgondolatokat szeretnék jól érteni.">
+
+<title>2&nbsp; A következtető statisztika alapjai – A valószínűségszámítás és a statisztika alapvonalai</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./bizonytalansag.html" rel="next">
+<link href="./valoszinusegszamitas.html" rel="prev">
+<link href="./cover.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-364982630eef5352dd1537128a8ed5cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<meta name="shinylive:serviceworker_dir" content=".">
+<script src="site_libs/quarto-contrib/shinylive-0.9.1/shinylive/load-shinylive-sw.js" type="module"></script>
+<script src="site_libs/quarto-contrib/shinylive-0.9.1/shinylive/run-python-blocks.js" type="module"></script>
+<link href="site_libs/quarto-contrib/shinylive-0.9.1/shinylive/shinylive.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nincs találat",
+    "search-matching-documents-text": "találat",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "További találatok elrejtése",
+    "search-more-match-text": "további találat ebben a dokumentumban",
+    "search-more-matches-text": "további találat ebben a dokumentumban",
+    "search-clear-button-title": "Törlés",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Mégse",
+    "search-submit-button-title": "Keresés",
+    "search-label": "Keresés"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="2&nbsp; A következtető statisztika alapjai – A valószínűségszámítás és a statisztika alapvonalai">
+<meta property="og:description" content="Ez a jegyzet a valószínűségszámítás és a statisztika alapjait igyekszik bemutatni, képletek, levezetések, matematikai formalizmusok nélkül. Azok számára, akiknek a matematikai formalizmus nem kell, de az alapgondolatokat szeretnék jól érteni.">
+<meta property="og:image" content="https://ferenci-tamas.github.io/valoszinusegszamitas-statisztika/kovetkezteto-statisztika_files/figure-html/unnamed-chunk-1-1.png">
+<meta property="og:site_name" content="A valószínűségszámítás és a statisztika alapvonalai">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
+<meta name="twitter:title" content="2&nbsp; A következtető statisztika alapjai – A valószínűségszámítás és a statisztika alapvonalai">
+<meta name="twitter:description" content="Ez a jegyzet a valószínűségszámítás és a statisztika alapjait igyekszik bemutatni, képletek, levezetések, matematikai formalizmusok nélkül. Azok számára, akiknek a matematikai formalizmus nem kell, de az alapgondolatokat szeretnék jól érteni.">
+<meta name="twitter:image" content="https://ferenci-tamas.github.io/valoszinusegszamitas-statisztika/kovetkezteto-statisztika_files/figure-html/unnamed-chunk-1-1.png">
+<meta name="twitter:image-height" content="960">
+<meta name="twitter:image-width" content="1344">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kovetkezteto-statisztika.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A következtető statisztika alapjai</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Keresés" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">A valószínűségszámítás és a statisztika alapvonalai</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika" title="Forráskód" class="quarto-navigation-tool px-1" aria-label="Forráskód"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Letöltés" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Letöltés"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./ferenci-tamas-valoszinusegszamitas-statisztika.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Letöltés PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./ferenci-tamas-valoszinusegszamitas-statisztika.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Letöltés ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <a href="" title="Megosztás" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Megosztás"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Keresés"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Előszó</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./valoszinusegszamitas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">A valószínűségszámítás röviden</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./kovetkezteto-statisztika.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A következtető statisztika alapjai</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bizonytalansag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A bizonytalanság jellemzése</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modszertan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Egy alapvető kutatásmódszertani kérdés</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tartalomjegyzék</h2>
+   
+  <ul>
+  <li><a href="#egy-rávezető-gyakorlat" id="toc-egy-rávezető-gyakorlat" class="nav-link active" data-scroll-target="#egy-rávezető-gyakorlat"><span class="header-section-number">2.1</span> Egy rávezető gyakorlat</a></li>
+  <li><a href="#egy-becslőfüggvény-felé" id="toc-egy-becslőfüggvény-felé" class="nav-link" data-scroll-target="#egy-becslőfüggvény-felé"><span class="header-section-number">2.2</span> Egy becslőfüggvény felé</a></li>
+  <li><a href="#a-bayes-i-probléma" id="toc-a-bayes-i-probléma" class="nav-link" data-scroll-target="#a-bayes-i-probléma"><span class="header-section-number">2.3</span> A bayes-i probléma</a></li>
+  <li><a href="#a-frekventista-statisztika-építménye" id="toc-a-frekventista-statisztika-építménye" class="nav-link" data-scroll-target="#a-frekventista-statisztika-építménye"><span class="header-section-number">2.4</span> A frekventista statisztika építménye</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika/edit/main/kovetkezteto-statisztika.qmd" class="toc-action"><i class="bi bi-github"></i>Az oldal szerkesztése</a></li><li><a href="https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika/blob/main/kovetkezteto-statisztika.qmd" class="toc-action"><i class="bi empty"></i>Forráskód megtekintése</a></li><li><a href="https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika/issues/new" class="toc-action"><i class="bi empty"></i>Észrevétel jelzése</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">A következtető statisztika alapjai</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A statisztika szó alatt rengeteg dolgot szoktak érteni. Statisztika annak módszertana, hogy hogyan kell az ország inflációját megbecsülni, statisztika, hogy egy piackutatást vagy közvéleménykutatást hogyan kell megtervezni és kiértékelni, statisztika, hogy 10 számból átlagot számolunk, statisztika, hogy 100 számból egy oszlopdiagramot rajzolunk. A statisztika kicsit matematizáltabb területeit két nagy csoportra szokták osztani, leíró (deskriptív) és következtető (induktív) statisztikára. Egyelőre nem mondom meg, hogy ezek a szavak mit jelentenek, mert a szükséges fogalmakat csak később fogom bevezetni, de annyit mindenesetre elárulok, hogy a továbbiakban ez utóbbiról, a következtető statisztikáról lesz szó. (A deskriptív statisztika általában jóval érthetőbb, és sokkal kevesebb kérdést vet fel.)</p>
+<section id="egy-rávezető-gyakorlat" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="egy-rávezető-gyakorlat"><span class="header-section-number">2.1</span> Egy rávezető gyakorlat</h2>
+<p>Barátunktól kapunk egy pénzérmét, mely nem feltétlenül szabályos, tehát nem biztos, hogy a fej dobás valószínűsége épp 0,5, azaz 50%. Lehet bármennyi, jelöljük <span class="math inline">\(p\)</span>-vel, egyedül annyit kössünk ki, hogy azért nem 0 és nem 1. A feladat: meghatározni <span class="math inline">\(p\)</span>-t, azaz megmondani, hogy mekkora valószínűséggel dobunk fejet. Mit csináljuk?</p>
+<p>A legtöbben valószínűleg mindenféle statisztikai megfontolás nélkül is azt tennék, hogy elkezdik feldobálgatni a pénzérmét, és számolják, hogy hányszor jön ki fej. Mondjuk, hogy 10-szer dobjuk fel, és 7-szor kapunk fejet. Úgy fogjuk mondani: ez lett a mintánk (a minta szó használatának oka később még világosabb lesz). A statisztika azon területét, ami egy megfigyelt jelenségből igyekszik következtetni valamilyen, a jelenség hátterében lévő dologra (jelen esetben a 10 dobásban kapott 7 fejből a <span class="math inline">\(p\)</span>-re) szokás <strong>induktív (vagy következtető) statisztikának</strong> mondani.</p>
+<p>Mit tudunk tehát mondani a 10 dobásból kapott 7 fej láttán?</p>
+<ul>
+<li>Ettől még a <span class="math inline">\(p\)</span> <em>elvileg</em> akármennyi lehet. Furcsa lenne, ha csak mondjuk 1% lenne (és mégis 10-ből 7-szer ez jött ki), de nem lehetetlen! Számoljuk is ki, hogy <span class="math inline">\(p=0,\!01\)</span> mellett mekkora valószínűséggel dobunk 10-ből 7-szer fejet. Ez esetben elsőre 0,01 valószínűséggel dobunk fejet, másodikra szintén, és ha e kettő dobás független egymástól, akkor annak a valószínűsége, hogy elsőre <em>és</em> másodikra is fejet dobunk <span class="math inline">\(0,\!01 \cdot 0,\!01\)</span>. (Emlékezzünk vissza, hogy független események együttes bekövetkezésének a valószínűsége a külön-külön vett bekövetkezési valószínűségeik szorzata!) Hasonlóképp, annak a valószínűsége, ha <span class="math inline">\(p=0,\!01\)</span>, hogy az első három fej lesz, nem más mint <span class="math inline">\(0,\!01^3\)</span>, és annak, hogy az első 7 fej lesz, <span class="math inline">\(0,\!01^7\)</span>. Pontosan 7 fejet akkor kapunk, ha a maradék 3 dobás mind írás (<span class="math inline">\(0,\!99^3\)</span>), így ennek az egész sorozatnak a valószínűsége <span class="math inline">\(0,\!01^7 \cdot 0,\!99^3\)</span>. Annak a valószínűsége, hogy 10-ből 7-szer jön ki fej azonban ennél jóval nagyobb, hiszen akkor is 7-szer jön ki, ha az első, harmadik, negyedik, …, nyolcadik lesz fej, akkor is, ha az utolsó 7 dobás fej stb. Némi pofozgatás után kiügyeskedhetjük, hogy ennek a valószínűsége: <span class="math inline">\(0,\!000000000001164\)</span>. Hát ez tényleg nem túl nagy… de <em>nem</em> nulla! Elvileg tehát akkor is dobhatunk 10-ből 7 fejet, ha közben 1% a fej-dobás valószínűsége.</li>
+<li>Más <span class="math inline">\(p\)</span> választásnál azonban más lesz annak a valószínűsége, hogy ha annyi az igazi <span class="math inline">\(p\)</span>, akkor mekkora valószínűséggel jön ki 10-ből 7 fej. Például ugyenilyen módon számolva, <span class="math inline">\(p=0,\!02\)</span>-nél ez <span class="math inline">\(0,\!000000000144567\)</span>, <span class="math inline">\(p=0,\!1\)</span>-nél <span class="math inline">\(0,\!000008748\)</span>, <span class="math inline">\(p=0,\!5\)</span>-nél <span class="math inline">\(0,\!1172\)</span> (egyre nő), <span class="math inline">\(p=0,\!9\)</span>-nél <span class="math inline">\(0,\!05740\)</span>, <span class="math inline">\(p=0,\!99\)</span>-nél <span class="math inline">\(0,\!0001118\)</span> (megint csökken).</li>
+</ul>
+<p>Lendületbe jöttünk! Akkor már na aprózzuk el, hogy néhány <span class="math inline">\(p\)</span>-nél számolgatjuk… számoljuk ki nagyon sűrűn 0-tól 1-ig és ábrázoljuk, hogy mit kapunk! Íme:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kovetkezteto-statisztika_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Azt, hogy <em>ha</em> az ismeretlen paraméter valódi értéke egy adott szám lenne, <em>akkor</em> mekkora valószínűséggel kapjuk azt, amit ténylegesen kaptunk is, <strong>likelihoodnak</strong> szokás nevezni. (Most valaki megkérdezhetné, hogy miért nem valószínűségnek hívjuk, hogy egyszer ez egy valószínűség. A kérdés jogos, ebben az esetben nyugodtan hívhatnánk valószínűségnek is, mert a pénzfeldobás kimenete diszkrét. Ha azonban folytonos lenne, akkor is szeretnénk egy ezzel teljesen analóg fogalmat használni, amit azonban semmiképpen nem hívhatnánk valószínűségnek, mert az nem valószínűség, úgyhogy a likelihood szó azért jó<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, hogy egy kifejezéssel lehessen egységesen mindkét esetre hivatkozni.) A fenti grafikonon tehát a 10-ből 7 fej” minta likelihoodja látszik különböző <span class="math inline">\(p\)</span>-k mellett.</p>
+<p>Na most akkor rakjuk össze hol tartunk. Egy: elvileg akármi lehet a <span class="math inline">\(p\)</span>, attól még kaphatjuk azt, amit ténylegesen kaptunk is (10-ből 7 fej)… tehát <em>biztosan</em> nem tudjuk megmondani, hogy mi a <span class="math inline">\(p\)</span>, bármit is mondunk, az mindenképp tipp lesz. De kettő: igenis tudunk <em>racionálisan</em> tippelni, mert hát csak ne tippeljük már azt a <span class="math inline">\(0,\!01\)</span>-et, ami mellett borzasztó valószínűtlen, hogy 10-ből 7 jöjjön ki…! Miközben épp most jött ki ez ténylegesen! Sőt, menjünk tovább: tippeljük azt, aminek a fennállása mellett a <em>legvalószínűbb</em>, hogy az jöjjön ki, ami ténylegesen ki is jött! Tehát ami mellett a legnagyobb a likelihoodja a ténylegesen kijött mintának.</p>
+<p>A statisztikusok nem „tippelést” mondanak, mert az nem sugározza e terület hideg profizmusát, úgyhogy e helyett a – csakugyan – sokkal komolyabban hangzó <strong>becslés</strong> szót használják. Amit a fentiekben láttunk, azt úgy hívják: <strong>maximum likelihood becslés</strong>, és ezek után már túl sok kommentár nemigen kell hozzá, hogy az elnevezés honnan jön: azt fogadjuk el az ismeretlen paraméter becsléseként, amely mellett a ténylegesen kijött minta likelihoodja a maximális.</p>
+<p>Mellesleg ránézve az ábrára, a maximum nagyon úgy tűnik, hogy <span class="math inline">\(0,\!7\)</span>, ami elég gyanúsan pont annyi, mint a fejek aránya a mintánkban…</p>
+</section>
+<section id="egy-becslőfüggvény-felé" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="egy-becslőfüggvény-felé"><span class="header-section-number">2.2</span> Egy becslőfüggvény felé</h2>
+<div style="text-align: right;border-bottom: 1px solid black; width: 40%;margin-left:auto; margin-right:0">
+Két dolog van, aminél jobb, ha az ember nem látja hogyan készül: a kolbász és a [statisztikai] becslés.
+</div>
+<div style="text-align: right; width:40%;margin-left:auto;margin-right:0">
+<i>Edward Leamer</i>
+</div>
+<p><br></p>
+<p>A becslést most megkaptuk egy konkrét mintára. De mi van akkor, ha más a minta? Ha nem 7-szer dobunk fejet, akkor mi lesz a maximum likelihood becslés? Játszunk el egy kicsit a dologgal (azt is beállíthatjuk, hogy hányszor dobtunk):</p>
+<pre class="shinylive-r" data-engine="r"><code>#| '!! shinylive warning !!': |
+#|   shinylive does not work in self-contained HTML documents.
+#|   Please set `embed-resources: false` in your metadata.
+#| standalone: true
+#| viewerHeight: 600
+
+library(shiny)
+library(miniUI)
+if (FALSE) {
+  library(munsell)
+}
+
+ui &lt;- miniPage(
+  miniTitleBar( "Likelihood különböző minták mellett" ),
+  miniContentPanel(
+    sliderInput( "n", "Dobások száma:", 1, 100, 10, 1, ticks = FALSE ),
+    uiOutput( "kselect" )
+  ),
+  miniContentPanel(
+    plotOutput("plot", height = "100%")
+  )
+)
+
+server &lt;- function(input, output) {
+  
+  output$kselect &lt;- renderUI({
+    sliderInput( "k", "Fejek száma:", 0, input$n, 7, 1, ticks = FALSE )
+  })
+
+    output$plot &lt;- renderPlot({
+      if( !is.null( input$k ) ) {
+        lattice::xyplot( dbinom( input$k, input$n, seq( 0, 1, 0.001 ) )~seq( 0, 1, 0.001 ), type = "l",
+                         scales = list( x = list( at = seq( 0, 1, 0.1 ) ) ), grid = TRUE,
+                         xlab = "p", ylab = "A beállított minta likelihoodja",
+                         panel = function( ... ) {
+                           lattice::panel.abline( v = seq( 0, 1, 0.1 ), col = scales::alpha( "black", 0.1 ) )
+                           lattice::panel.xyplot( ... )
+                         })
+      }
+    })
+}
+
+shinyApp(ui, server)</code></pre>
+<p>Eleget próbálkozva valószínűleg mindenkiben kialakul egy benyomás: a maximum likelihood becslés mindig épp a fejek aránya a mintában, tehát a dobálgatásos kísérletsorozatunkban.</p>
+<p>Mondom a jó hírt: a dolog nem véletlen. Matematikailag bebizonyítható, hogy ez <em>mindig</em> így <em>kell</em> legyen: a maximum likelihood becslés az ismeretlen paraméterre (a fej-dobás valószínűségére) a mintabeli arány lesz. Vegyük észre, hogy ezzel egy jóval erősebb eredményt értünk el, mint az előző pontban, hiszen nem <em>egy konkrét</em> helyzetre adtuk meg a jó becslést, hanem egy <em>általános receptet</em> találtunk, ami <em>minden</em> mintára megadja, hogy annál a mintánál mi lesz a jó becslés! A recept tehát egy általános számítási eljárás: megmondja, hogy mit csináljunk a mintában lévő megfigyelésekkel (jelen esetben: számoljuk meg, hogy hány fej van benne, majd osszuk el a dobások számával), hogy megkapjuk az abból a mintából számolható becslést. Az ilyen „általános receptet” szép nevén <strong>becslőfüggvénynek</strong> nevezzük. A valószínűség maximum likelihood becslőfüggvénye tehát a mintabeli arány.</p>
+</section>
+<section id="a-bayes-i-probléma" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="a-bayes-i-probléma"><span class="header-section-number">2.3</span> A bayes-i probléma</h2>
+<div style="text-align: right;border-bottom: 1px solid black; width: 40%;margin-left:auto; margin-right:0">
+Sok nehézséget megspórolnánk, ha [a bayes-i statisztika hívei] követnék Bayes példáját, és csak a haláluk után publikálnának.
+</div>
+<div style="text-align: right; width:40%;margin-left:auto;margin-right:0">
+<i>Maurice Kendall</i>
+</div>
+<br>
+<div style="text-align: right;border-bottom: 1px solid black; width: 40%;margin-left:auto; margin-right:0">
+Azt gondolom, hogy van jogos érv a nem bayes-i eljárások használatának védelmében, jelesül, a tudatlanság.
+</div>
+<div style="text-align: right; width:40%;margin-left:auto;margin-right:0">
+<i>John Skilling</i>
+</div>
+<p><br></p>
+<p>Eddig látszólag minden szép, tiszta és világos. Kézenfekvő a levezetés ahogyan eljutottunk a maximum likelihood becslésig, tökéletesen logikus volt minden lépés. De nézzük csak meg jobban, hogy milyen feltételes valószínűséget vizsgáltunk ott! <span class="math inline">\(\mathbb{P}\left(\text{minta}\mid\text{ismeretlen paraméter}\right)\)</span>. Ha elég sokáig és elég szúrós szemmel nézzük ezt, akkor valószínűleg egyszer csak elfog minket a jeges rémület: a Bayes-tételről szóló részben (@ref(bayesvalszam). alfejezet) <em>pont</em> az ilyen valószínűségek használatával követtünk el kapitális hibát! Hiszen, nézzük meg, pont ugyanaz a baj itt is: arra feltételezünk, amit nem ismerünk, és annak a valószínűségét kérdezzük, amit ismerünk! Ahogy már ott is láttuk, <em>pont fordítva</em> kellene: nem az érdekel minket, hogy az ismeretlen paraméter ismeretében mit tudunk mondani a mintáról, hanem az, hogy a minta ismeretében mit tudunk mondani az ismeretlen paraméterről!</p>
+<p>Szerencsére épp az ott megtanultak miatt nem esünk pánikba, hiszen tudjuk mi a teendő, hogy megfordítsuk a dolgot, és áttérjünk a <em>tényleg releváns</em> feltételes valószínűségre:</p>
+<p><span class="math display">\[\mathbb{P}\left(\text{ismeretlen paraméter}\mid\text{minta}\right)=\frac{\mathbb{P}\left(\text{minta}\mid\text{ismeretlen paraméter}\right)\cdot \mathbb{P}\left(\text{ismeretlen paraméter}\right)}{\mathbb{P}\left(\text{minta}\right)}.\]</span></p>
+<p>A számláló első tagja nem probléma: ez épp a likelihood! A nevező szintén nem probléma, a Bayes-tételnél látott trükkel itt is elintézhetjük, ha egyébként a számlálót ismerjük. De mi a helyzet a <span class="math inline">\(\mathbb{P}\left(\text{ismeretlen paraméter}\right)\)</span>-rel…?</p>
+<p>Próbáljuk megérteni, hogy ez mit jelent. Mi a valószínűsége annak, hogy a paraméter adott értékű, <em>úgy hogy a mintát nem is ismerjük</em>. Mit gondolunk arról, hogy milyen a fej-dobási valószínűség, még mielőtt egyetlen egyszer is feldobtuk volna az érmét? Valaki esetleg azt mondhatja: semmit, hát épp ezért kezdjük dobálni! Ez egy jogos ellenvetés, de egyelőre rakjuk félre, vagy mondjuk azt, hogy a „semmit nem gondolunk”, az ezt jelenti<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kovetkezteto-statisztika_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Tehát: 0-nál kisebb és 1-nél nagyobb nem lehet a fej-dobási valószínűség, azon belül pedig minden érték környékére ugyanakkora valószínűséggel esik<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>Ha azonban jobban megnézzük, akkor most egy nagyon erőteljes eszközt kaptunk a kezükbe. A Bayes-tétel ugyanis lehetővé teszi, hogy <em>felhasználjuk</em> ha <em>van</em> valamilyen előzetes ismeretünk, elképzelésünk a paraméter eloszlásáról! Például az érmét egy megbízható barátunktól kaptuk, és azt gondoljuk, hogy – ha nem is biztosan – de valószínűleg nem cinkelt, legalábbis nem nagyon. Ekkor a következő lehet a feltételezésünk a fej-dobás valószínűségéről, még mielőtt egyetlen egyszer is feldobtuk volna:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kovetkezteto-statisztika_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ezeket az eloszlásokat szokták – a korábban mondottak fényében nagyon is érthető szóval – <strong>prior eloszlásnak</strong> nevezni.</p>
+<p>Mit kapunk a bayes-i megközelítés eredményeként? Korábban azt írtam, hogy <span class="math inline">\(\mathbb{P}\left(\text{ismeretlen paraméter}\mid\text{minta}\right)\)</span>, de ezt némileg idézőjelbe kell tenni: az ismeretlen paraméter egy folytonos dolog (bárhol lehet 0 és 1 között), tehát nem arról lesz szó, hogy mekkora valószínűséggel vesz fel egy értéket, hanem <em>eloszlása lesz</em>. Ami tulajdonképpen teljesen logikus: van egy eloszlása a kísérletezgetésünk előtt (a prior eloszlás), és egy másik a kísérletezés után. Hát persze: a Bayes-tétel, amint láttuk, beépít egy információt, és itt is ez történt: fogja a prior eloszlást, beleépíti az információt, ami kiderült a kísérletezésünkből, tehát a mintából, és kiköp egy „frissített” eloszlást, ami már a minta információját is tartalmazza. Ezt szokás – szintén logikus szóval – <strong>poszterior eloszlásnak</strong> nevezni.</p>
+<p>Például egyenletes prior esetén a következő lesz a poszterior (továbbra is mondjuk, hogy 7 fejet dobtunk 10 kísérletből):</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kovetkezteto-statisztika_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Viszont a „baráttól kaptunk a pénzérmét” prior esetén így fog kinézni a poszterior <em>pontosan ugyanazon minta</em> mellett:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kovetkezteto-statisztika_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A különbség nem nagy, de ha jobban megnézzük azért érzékelhető: az utóbbi esetben kicsit balra mászott a poszterior eloszlás. Miért? Azért, mert hiába láttuk azt, hogy a kísérletben meglehetősen cinkeltnek mutatkozott a pénzérme, de mi hajlunk arra egyéb (értsd: kísérletünkön kívüli) okokból, hogy a pénzérme nem annyira cinkelt, ezért bár a próbálkozásunk eléggé meggyőzött az ellenkezőjéről, de nem tökéletesen (nem annyira, mintha nem lett volna ilyen előzetes hiedelmünk). Tehát pontosan azt látjuk, hogy az előzetes ismeret <em>beleépült</em> a becslésbe!</p>
+<p>Nagyon tanulságos kipróbálni mindenféle prior és minta mellett, hogy hogyan alakul a poszterior, és hogy az hogyan viszonyul a – prior információval nem törődő – maximum likelihood becsléshez. A következő grafikonon a két eloszlás mellett látható a maximum likelihood becslés is, vastagabb függőleges vonallal megjelölve (azzal ne törődjünk, hogy az <span class="math inline">\(\alpha\)</span> meg a <span class="math inline">\(\beta\)</span> mit jelent, a lényeg, hogy ezek állításával a prior eloszlás alakját nagyon sokféle kinézetre beállíthatjuk):</p>
+<pre class="shinylive-r" data-engine="r"><code>#| '!! shinylive warning !!': |
+#|   shinylive does not work in self-contained HTML documents.
+#|   Please set `embed-resources: false` in your metadata.
+#| standalone: true
+#| viewerHeight: 800
+
+library(shiny)
+library(miniUI)
+
+ui &lt;- miniPage(
+  miniTitleBar( "Becslés bayes-i megközelítése" ),
+  miniContentPanel(
+    sliderInput( "n", "Dobások száma:", 1, 100, 10, 1, ticks = FALSE ),
+    uiOutput( "kselect" ),
+    sliderInput( "alpha", "α:", 0.1, 10, 1, 0.1 ),
+    sliderInput( "beta", "β:", 0.1, 10, 1, 0.1 ),
+  ),
+  miniContentPanel(
+    plotOutput("plot", height = "100%")
+  )
+)
+
+server &lt;- function(input, output) {
+  
+  output$kselect &lt;- renderUI({
+    sliderInput( "k", "Fejek száma:", 0, input$n, 7, 1, ticks = FALSE )
+  })
+  
+  output$plot &lt;- renderPlot({
+    if( !is.null( input$k ) ) {
+      plotgrid &lt;- seq( 0, 1, 0.001 )
+      lattice::xyplot( Prior + Poszterior ~ plotgrid, type = "l", auto.key = list( columns = 2, points = FALSE, lines = TRUE ),
+                       data = data.frame( p = plotgrid, Prior = dbeta( plotgrid, input$alpha, input$beta ),
+                                          Poszterior = dbeta( plotgrid, input$alpha+input$k, input$beta+input$n-input$k ) ),
+                       scales = list( x = list( at = seq( 0, 1, 0.1 ) ) ), xlab = "p", ylab = "",
+                       panel = function( ... ) {
+                         lattice::panel.abline( v = seq( 0, 1, 0.1 ), col = lattice::trellis.par.get("reference.line")$col )
+                         lattice::panel.grid( h = -1, v = 0 )
+                         lattice::panel.abline( v = input$k/input$n, lwd = 2 )
+                         lattice::panel.xyplot( ... )
+                       })
+    }
+  })
+}
+
+shinyApp(ui, server)</code></pre>
+<p>Próbálkozzunk mindenféle priorokkal (egyenletes, valahol csúcsosabb) és különböző mintákkal is (nem csak különböző fej-dobás számok, de különböző kísérlethosszak is)!</p>
+<p>Milyen tanulságokat szűrhetünk le ebből? A legfontosabbak:</p>
+<ul>
+<li>A prior maga felé „húzza” a poszteriort, ahhoz képest mint ahol a maximum likelihood becslés lenne. Ennek magyarázatát már láttuk: a poszterior egyszerre veszi figyelembe a prior információt és a dobálgatásunk kimenetét (míg a maximum likelihood becslés csak ez utóbbit).</li>
+<li>Minél csúcsosabb a prior, ez annál inkább igaz. Persze: a csúcsosabb prior azt jelenti, hogy biztosabbak vagyunk már eleve is abban, hogy ott van a paraméter értéke, kevésbé „bizonytalanít el” minket ebben még egy ellentmondó eredmény is.</li>
+<li>És a végére még egy nagyon fontos dolog: a prior annál jobban számít, minél kisebb volt a minta, tehát minél kevesebbszer dobtuk fel a pénzérmét. De gondoljuk meg, ez kristálytisztán logikus: rövidebb kísérlet kevesebb információt jelent (bármi is jön ki belőle), tehát érthető, hogy az kevésbé befolyásolja az előzetes meggyőződésünket – ilyenkor még a poszteriort a prior dominálja. De ha nagyon hosszú a kísérletünk, akkor már perdöntő ami abból kijön, kevéssé számít, hogy előzetesen hogyan vélekedtünk. A bayes-i módszertan tehát automatikusan megvalósítja ezt az átmenetet.</li>
+</ul>
+<p>Felmerül még a kérdés, hogy a bayes-i megközelítésből mégis hogyan kapunk becslést, azaz egyetlen számot, mint amit tippelünk az ismeretlen értékre? Hiszen úgy tűnik, hogy itt csak komplett eloszlásunk van! Valóban, valahogy a legvégén az eloszlásból egyetlen számot kell gyártani. Erre többféle módszer is van, itt most nem tárgyalom részletesen<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, csak az érzékeltetés kedvéért: olyan megoldások lehetségesek, mint hogy vesszük azt az értéket, ahol a poszterior eloszlás maximuma van, vagy egyszerűen vesszük az egész eloszlás várható értékét.</p>
+<p>És ezzel végeztünk! Felépítettük a becsléselméletet <strong>bayes-i</strong> alapokon is.</p>
+<p>A kérdés már csak egy: melyik a jobb? A maximum likelihood jellegű megközelítés, vagy a bayes-i? Ez a probléma a 20. század közepén, második felének az elején merült fel csak (noha a Bayes-tétel 200 évvel korábbi), de akkor viszont nagyon is intenzív formában: a bayes-i megközelítést a statisztikusok egy kisebb, de nagyon elszánt része képviselte, akik elég elsöprő elutasítással találkoztak a többiek részéről, aminek az eredménye egy párját ritkitóan harcias tudományos összeütközés lett a két iskola hívei között.</p>
+<p>Ebben a vitában nagyon sok részletkérdés van, de a legfontosabb probléma egyszerű: a priorok ügye. Sok ember gyomra nagyon-nagyon(-nagyon-nagyon) nehezen veszi be, hogy ahhoz, hogy eredményt kapjunk, kell valamit mondanunk arról, hogy mit gondolunk még mielőtt egyáltalán belefogunk a kísérletbe… „Hát én szeretnék csak a kísérlet alapján választ kapni!” „Pont azért csináltam a kísérletet, hogy megtudjam mi a helyzet!” A bayes-i megközelítésben ezt nem lehet, és nem azért, mert nem vagyunk elég ügyesek, hanem mert ez elvileg lehetetlen, hiszen ebben a megközelítésben a kísérlet csak <em>módosítja</em> a hiedelmünket. Ez nem objektív! – mondják sokan. Hiszen az az objektív, ami magából a kísérletből kijön, és pont, az alapján kell nyilatkozni, az egy teljesen megfoghatatlan szubjektív dolog, hogy én mit mondok mi volt az előzetes elképzelésem… hát mondhatok akármit! És hogy ezen múljon a végeredmény?!</p>
+<p>Persze, másik oldalról ott van, hogy a bayes-i eljárás ad választ az <em>igazi</em> kérdésre. Nem a fordított valószínűséget nézi, hanem azt, ami tényleg releváns számunkra. Ennek az ára az, hogy kell a prior. Ami az objektivitást illeti, a bayes-i módszer hívei erre azt mondják, hogy a maximum likelihood jellegű megközelítésben nincs kevesebb szubjektivitás, csak az el van rejtve különféle részletekben (például a mintavétel jellegének meghatározása), és akkor már jobb, ha ez explicite megjelenik.</p>
+<p>E helyütt természetesen nem fogok igazságot szolgáltatni ebben a kérdésben. Két feladatot érzek fontosnak, az egyik – ami a fentiekben megtörtént – bemutatni a bayes-i gondolkodást is mint egyenrangú alternatíva, mert ez sok irodalomban vagy nem jelenik meg, vagy csak a másik megközelítés nagyon részletes ismertetése után. Látni kell, hogy jelenleg a legtöbb statisztikai területen a másik iskola dominál, így bármit is gondolunk róla, a második feladat azt részletesen bemutatni, hiszen abban a szellemben íródott cikkeket kell túlnyomó többségben megérteni (és, ha úgy adódik, jellemzően írni is).</p>
+</section>
+<section id="a-frekventista-statisztika-építménye" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="a-frekventista-statisztika-építménye"><span class="header-section-number">2.4</span> A frekventista statisztika építménye</h2>
+<div style="text-align: right;border-bottom: 1px solid black; width: 40%;margin-left:auto; margin-right:0">
+Az egyetlen mód, hogy érthetővé tegyük a frekventista eljárásokat az, ha hazudunk róluk.
+</div>
+<div style="text-align: right; width:40%;margin-left:auto;margin-right:0">
+<i>Frank Harrell</i>
+</div>
+<p><br></p>
+<p>Először kezdjük gyorsan egy terminológiai kérdéssel: amit korábban többször is úgy hívtam, hogy „maximum likelihood jellegű” megközelítés, az hivatalos nevén a <strong>frekventista</strong> megközelítés. Ha valaki arra asszociál, hogy ilyenről már volt szó, a valószínűség interpretációi kapcsán (@ref(valinterpretacio). alfejezet), akkor hamar ki fog derülni, hogy ez egyáltalán nem véletlen.</p>
+<p>Ahogy a korábbiakból is kiderült, a frekventista hozzáállás legfontosabb komponense két szóban összefoglalható: <em>fordított logika</em>. Nem azt nézzük, hogy feltéve a mintát mit tudunk mondani valami ismeretlen dologról, hanem azt, hogy feltéve az ismeretlen dolgot, mit tudunk mondani a mintáról. <em>Ez minden frekventista eljárás sajátja!</em></p>
+<p>Hogy ezt mélyebben megértsük, kapirgáljuk meg kicsit jobban a maximum likelihood becslőt a pénzfeldobásos példában. Megbeszéltük, hogy ekkor az ismeretlen <span class="math inline">\(p\)</span> paraméter, az érme ismeretlen fej-dobási valószínűsége a kísérletben kapott fej-dobási aránnyal becsülhető maximum likelihood módon. Azt is megjegyeztük, hogy ez persze csak tipp, hiszen biztosak soha nem lehetünk. Nézzük meg az utóbbit kicsit közelebbről! Mondjuk, hogy ismerjük a <span class="math inline">\(p\)</span>-t (fordított logika!), és nézzük meg, hogy ekkor a mintabeli arány hogyan viselkedik! Például legyen a <span class="math inline">\(p=0,\!6\)</span>, ekkor mekkora valószínűséggel dobunk 10-ből 0 fejet, 10-ből 1-et, 10-ből 2, …, 10-ből 10-et. A számítást már láttuk is a fejezet elején, csak most nem különböző <span class="math inline">\(p\)</span>-kre számítjuk ugyanazt a fej-dobás számot, hanem ugyanarra a <span class="math inline">\(p\)</span>-re különböző fej-dobás számokat. Íme az eredmény:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kovetkezteto-statisztika_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Tehát még egyszer, ha <span class="math inline">\(0,\!6\)</span> az ismeretlen paraméter valódi értéke, így fog eloszlani, hogy mi mennyit becsülünk rá a mintából! Látszik, hogy ha pechünk van, akár nagyon eltérhetünk, becsülhetünk akár 20%-ot, vagy 100%-ot is – de ezeknek kicsi a valószínűsége. De ami még fontosabb: meg tudjuk mondani, hogy mennyi!</p>
+<p>De egy pillanatra álljunk is meg itt rögtön. Mi az, hogy mekkora valószínűséggel dobunk 2 vagy 10 (vagy akárhány) fejet? Itt van az asztalon a pénzérme, épp most dobtam vele 7-szer fejet, akkor meg miről beszélek, hogy mekkora valószínűséggel dobok 2-szer fejet?! Hát 0, mert 100% valószínűséggel 7-et dobtam…! Itt jön a frekventista iskola kulcsgondolata: a valószínűségek csak úgy kapnak értelmet, ha <em>képzeletben újra meg újra megismételnénk</em> a kísérletünket! Felvenném a pénzérmét (<em>ugyanazt</em>! tehát <span class="math inline">\(p\)</span> ugyanannyi!) és <em>újra</em> megcsinálnám a 10 dobásos kísérletet. Feljegyzem, hogy hány fej lett, majd megint megismétlem. Majd megint. Majd megint. Majd megint. Aztán amikor nagyon sokszor megtettem, akkor megszámolom hogy hogyan oszlik meg a fej-dobások száma – és így <em>az előbbi ábrát kapom</em>! Persze, hiszen a valószínűség frekventista értelmezése az volt, hogy amihez a relatív gyakoriság tart, itt a relatív gyakoriság az, hogy az esetek mekkora részében kaptam mondjuk 2 fejet, amire az előbb azt mondtam, hogy „megszámolom hogy hogyan oszlik meg a fej-dobások száma”. De azt, hogy mihez tart a relatív gyakoriság, csak akkor tudom, ha elég sokszor megismételtem az egész 10 dobálásos kísérletemet.</p>
+<p>Tehát miközben egyetlen kísérletem van ténylegesen, ilyen értelemben beszélhetek csak valószínűségről. <em>Képzeletbeli ismételt mintavétel</em> – ez minden frekventista eljárás mentális modellje. Ez az az aspektus (a fordított logika hangsúlyozása mellett), amit gyakran elhanyagolnak, és csakugyan egyszerűbbnek tűnhet elmismásolni, hiszen kissé agyzsibbasztó dologról van szó, de később komoly félreértések táptalaja lehet, ha ezt nem értjük meg jól.</p>
+<p>Érdemes itt még egy terminológiát bevezetni. Ahogy már én is használtam, a kísérletünk kimenetét, amit megfigyelünk, <strong>mintának</strong> szokás nevezni, míg a mögötte képzeletben lévő eloszlást, aminek valamilyen ismeretlen jellemzőjére kíváncsiak vagyunk, <strong>sokaságnak</strong>. E szavak talán jobban érthetőek ha arra az esetre gondolunk, amikor a sokaság nem egy eloszlás, hanem elemeivel adott. Ez főleg a társadalomtudományok terén fordul elő: a sokaság mondjuk az elsőéves egyetemisták 1000 fős halmaza, és arra vagyunk kíváncsiak, hogy átlagosan mennyi időt fordítanak hetente tanulásra, de nem tudjuk mindegyiket megkérdezni, csak mondjuk – véletlenszerűen kiválasztott – 100-at közülük. Ekkor pontosan ugyanaz lesz a problémánk: mind az 1000 átlaga egyetlen adott, jól meghatározott érték – csak mi nem fogjuk tudni, hogy mennyi! Hiszen csak 100-at ismerünk, és az abból kiszámolt becslés, akárhogy is számolunk, attól is fog függeni, hogy <em>pont melyik</em> 100-at választjuk ki. (És itt most kizárólag a véletlen szeszélyéről beszélek, ezért is hangsúlyoztam, hogy véletlenül vettük a mintát.) Ha képzeletben újra meg újra eljátszanánk azt, hogy 100 főt véletlenszerűen kiválasztunk, és kiszámoljuk belőle a becslést, akkor ez mintáról mintára más lenne. A helyzet tehát teljesen analóg<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, de itt talán jobban érthető, hogy miért mondunk <strong>mintavételt</strong>: a sokaság az, amire a kérdésünk irányul, de ezt az egész halmazt nem tudjuk megfigyelni (azaz lemérni); azt a részét, amit igen, hívjuk mintának. Ezért mondhatjuk a pénzfeldobásra is, hogy azzal „mintát veszünk” az ismeretlen sokaságból.</p>
+<p>Térjünk most vissza a frekventista következtető statisztika alapkérdéseire. A látott problémát, tehát, hogy hiába volt adott, állandó, rögzített értéke az ismeretlen paraméternek, mi mégis más és más becslést kapunk mintából, ha (képzeletben) újra meg újra mintát veszünk, szokás <strong>mintavételi ingadozásnak</strong> nevezni. A frekventista iskolában ez a kézenfekvő elmagyarázása annak, hogy miért nem lehet soha biztos állítást tenni: hiába is adott értékű <span class="math inline">\(p\)</span>, akkor is kaphatunk más értékeket a mintából. <em>Ugyanaz</em> volt a sokaság, <em>ugyanúgy</em> véletlen mintát vettünk, mégis mást és mást kaptunk.</p>
+<p>A fenti grafikont, amelyen látjuk, hogy az ismeretlen paraméter adott értékénél hogy oszlik el a mintából becsült paraméter (a mintavételi ingadozás miatt) szokás a becslőfüggvény <strong>mintavételi eloszlásának</strong> nevezni.</p>
+<p>Érdemes kicsit kísérletezni, hogy ez hogyan függ a <span class="math inline">\(p\)</span>-től és – különösen – a mintanagyságtól:</p>
+<pre class="shinylive-r" data-engine="r"><code>#| '!! shinylive warning !!': |
+#|   shinylive does not work in self-contained HTML documents.
+#|   Please set `embed-resources: false` in your metadata.
+#| standalone: true
+#| viewerHeight: 450
+
+library(shiny)
+library(miniUI)
+
+ui &lt;- miniPage(
+  miniTitleBar( "Becslés frekventista megközelítése" ),
+  miniContentPanel(
+    sliderInput( "n", "Dobások száma:", 1, 100, 10, 1, ticks = FALSE ),
+    sliderInput( "p", "p:", 0, 1, 0.5, 0.01 )
+  ),
+  miniContentPanel(
+    plotOutput("plot", height = "100%")
+  )
+)
+
+server &lt;- function(input, output) {
+  
+  output$plot &lt;- renderPlot({
+    lattice::xyplot( dbinom( 0:(input$n), input$n, input$p )~0:(input$n),
+                     xlab = "Dobott fejek száma", ylab = "Valószínűség",
+                     panel = function( x, y, ... ) {
+                       lattice::panel.abline( h = 0, col = lattice::trellis.par.get("reference.line")$col )
+                       lattice::panel.xyplot( x, y, type = "h", ... )
+                       lattice::panel.points( x, y, pch = 19 )
+                     })
+  })
+}
+
+shinyApp(ui, server)</code></pre>
+<p>Némi játszadozás után levonhatjuk a legfontosabb tanulságot: minél nagyobb a mintaméret, annál kisebb a mintavételi ingadozás mértéke! Azaz, annál kisebb lesz a bizonytalansága a mintából becsült értéknek. Ez egy nagyon fontos megállapítás, hiszen</p>
+<ul>
+<li>azt eddig is láttuk, hogy a mintavételi ingadozás soha nem szüntethető meg (biztos állítást soha nem tudunk tenni), de most már látjuk, hogy mi az az egyetlen dolog, amit viszont tehetünk ellene: megnövelhetjük a mintanagyságot,</li>
+<li>ha ráadásul számszerűsíteni is tudjuk a mintanagyság és a mintavételi ingadozás közti összefüggést (és elárulhatom: tudjuk), akkor meg tudunk oldani olyan problémát, hogy ha megadják milyen biztos becslés kell, akkor meghatározzuk, hogy ahhoz mekkora mintaméret szükséges.</li>
+</ul>
+<p>Ezekkel a kérdésekkel azonban már kezdünk a következő fejezetünk témájára átkerülni: hogy a becslésben lévő bizonytalanságot hogyan lehet megragadni, jellemezni.</p>
+<!-- Itt most egyetlen zárómondat erejéig érdemes még visszatekinteni a bayes-i eljárásokra, hogy meggondoljuk, jól értjük-e a különbséget: a frekventista felfogásban az ismeretlen paraméternek nincsen semmilyen eloszlása, az egy konkrét szám (maximum mi nem tudjuk mennyi!), viszont a mintából kiszámolt becslésnek eloszlása lesz, hiszen mintáról-mintára ingadozik. A bayes-i felfogásban ezzel szemben az ismeretlen értéknek eloszlása van, -->
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Felmerül a kérdés, hogy a likelihood-ot hogy mondják magyarul, a válasz: likelihood. A probléma az, hogy a „valószínűség”-ként való lefordítás konkrétan hibás; próbálkoztak régebben a „valószerűség” fordítással, de nem igazán ment át a gyakorlatba.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Van más értelmezése is annak, hogy mit jelent a „nem tudunk semmit”, de ez félig (nem teljesen!) a filozófia tárgyköre.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Ezt szokták <em>egyenletes eloszlásnak</em> hívni: bármely 0 és 1 közti intervallumba akkora valószínűséggel esik, mintha az intervallum hossza. Ez tényleg azt jelenti, hogy bármely pont környékére ugyanakkora valószínűséggel esik.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Azért az okát elmondom: ahhoz, hogy megmondjuk, hogyan gyártunk az egész eloszlásból egyetlen számot, szükség van <em>még egy</em> döntésre: meg kell határoznunk, hogy adott tévedést, hogy a tippelt érték mennyire ment a valós mellé, milyen súlyosnak minősítjük. Például ha kétszer távolabb vagyunk a valóságtól, az kétszer nagyobb baj? Vagy négyszer? Vagy ugyanakkora baj, mert csak az számít, hogy nem találtuk el? Ha erre a kérdésre válaszolunk, akkor abból már kiadódik a becslőfüggvény.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Ez szó szerint igaz: az elemeivel adott sokaság is elmondható úgy, mintha egy eloszlás lenne a háttérben: egy diszkrét eloszlás, mely 1000 értéket vehet fel, melyek nem mások, mint az 1000 hallgató tanulással töltött óráinak száma, és mindegyiket <span class="math inline">\(1/1000\)</span> valószínűséggel veszi fel. A 100 hallgató véletlenszerű kiválasztása tehát tényleg pontosan olyan, mintha ebből az eloszlásból „feldobnék 100 pénzérmét”.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kimásolva!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kimásolva!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/ferenci-tamas\.github\.io\/valoszinusegszamitas-statisztika");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./valoszinusegszamitas.html" class="pagination-link" aria-label="A valószínűségszámítás röviden">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">A valószínűségszámítás röviden</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./bizonytalansag.html" class="pagination-link" aria-label="A bizonytalanság jellemzése">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">A bizonytalanság jellemzése</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika/edit/main/kovetkezteto-statisztika.qmd" class="toc-action"><i class="bi bi-github"></i>Az oldal szerkesztése</a></li><li><a href="https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika/blob/main/kovetkezteto-statisztika.qmd" class="toc-action"><i class="bi empty"></i>Forráskód megtekintése</a></li><li><a href="https://github.com/ferenci-tamas/valoszinusegszamitas-statisztika/issues/new" class="toc-action"><i class="bi empty"></i>Észrevétel jelzése</a></li></ul></div></div></div></footer><script type="text/javascript">
+var sc_project=12422840; 
+var sc_invisible=1; 
+var sc_security="d32cce24"; 
+</script>
+<script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async=""></script>
+<noscript><div class="statcounter"><a title="ingyenes
+webstatisztika" href="https://www.statcounter.hu/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/12422840/0/d32cce24/1/" alt="ingyenes webstatisztika" referrerpolicy="no-referrer-when-downgrade"></a></div></noscript>
+
+
+
+
+</body></html>
