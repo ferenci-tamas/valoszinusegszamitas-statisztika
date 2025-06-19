@@ -103,13 +103,13 @@ Mondom a jó hírt: a dolog nem véletlen. Matematikailag bebizonyítható, hogy
 ```{r, eval = (knitr::is_html_output()), echo=FALSE, results='asis'}
 cat("<div style='text-align: right;border-bottom: 1px solid black; width: 40%;margin-left:auto; margin-right:0'>Sok nehézséget megspórolnánk, ha [a bayes-i statisztika hívei] követnék Bayes példáját, és csak a haláluk után publikálnának.</div><div style='text-align: right; width:40%;margin-left:auto;margin-right:0'><i>Maurice Kendall</i></div><br>")
 ```
-\epigraph{Azt gondolom, hogy van jogos érv a nem bayes-i eljárások használatának védelmében, jelesül, a tudatlanság.}{\textit{John Skilling}}
+\epigraph{Azt gondolom, hogy van jogos érv a nem bayes-i eljárások használatának védelmében, jelesül, a hozzá nem értés.}{\textit{John Skilling}}
 
 ```{r, eval = (knitr::is_html_output()), echo=FALSE, results='asis'}
-cat("<div style='text-align: right;border-bottom: 1px solid black; width: 40%;margin-left:auto; margin-right:0'>Azt gondolom, hogy van jogos érv a nem bayes-i eljárások használatának védelmében, jelesül, a tudatlanság.</div><div style='text-align: right; width:40%;margin-left:auto;margin-right:0'><i>John Skilling</i></div><br>")
+cat("<div style='text-align: right;border-bottom: 1px solid black; width: 40%;margin-left:auto; margin-right:0'>Azt gondolom, hogy van jogos érv a nem bayes-i eljárások használatának védelmében, jelesül, a hozzá nem értés.</div><div style='text-align: right; width:40%;margin-left:auto;margin-right:0'><i>John Skilling</i></div><br>")
 ```
 
-Eddig látszólag minden szép, tiszta és világos. Kézenfekvő a levezetés ahogyan eljutottunk a maximum likelihood becslésig, tökéletesen logikus volt minden lépés. De nézzük csak meg jobban, hogy milyen feltételes valószínűséget vizsgáltunk ott! $\mathbb{P}\left(\text{minta}\mid\text{ismeretlen paraméter}\right)$. Ha elég sokáig és elég szúrós szemmel nézzük ezt, akkor valószínűleg egyszer csak elfog minket a jeges rémület: a Bayes-tételről szóló részben (\@ref(bayesvalszam). alfejezet) *pont* az ilyen valószínűségek használatával követtünk el kapitális hibát! Hiszen, nézzük meg, pont ugyanaz a baj itt is: arra feltételezünk, amit nem ismerünk, és annak a valószínűségét kérdezzük, amit ismerünk! Ahogy már ott is láttuk, *pont fordítva* kellene: nem az érdekel minket, hogy az ismeretlen paraméter ismeretében mit tudunk mondani a mintáról, hanem az, hogy a minta ismeretében mit tudunk mondani az ismeretlen paraméterről!
+Eddig látszólag minden szép, tiszta és világos. Kézenfekvő a levezetés ahogyan eljutottunk a maximum likelihood becslésig, tökéletesen logikus volt minden lépés. De nézzük csak meg jobban, hogy milyen feltételes valószínűséget vizsgáltunk ott! $\mathbb{P}\left(\text{minta}\mid\text{ismeretlen paraméter}\right)$. Ha elég sokáig és elég szúrós szemmel nézzük ezt, akkor valószínűleg egyszer csak elfog minket a jeges rémület: a Bayes-tételről szóló részben ([-@sec-bayesvalszam]. alfejezet) *pont* az ilyen valószínűségek használatával követtünk el kapitális hibát! Hiszen, nézzük meg, pont ugyanaz a baj itt is: arra feltételezünk, amit nem ismerünk, és annak a valószínűségét kérdezzük, amit ismerünk! Ahogy már ott is láttuk, *pont fordítva* kellene: nem az érdekel minket, hogy az ismeretlen paraméter ismeretében mit tudunk mondani a mintáról, hanem az, hogy a minta ismeretében mit tudunk mondani az ismeretlen paraméterről!
 
 Szerencsére épp az ott megtanultak miatt nem esünk pánikba, hiszen tudjuk mi a teendő, hogy megfordítsuk a dolgot, és áttérjünk a *tényleg releváns* feltételes valószínűségre:
 
@@ -228,7 +228,7 @@ E helyütt természetesen nem fogok igazságot szolgáltatni ebben a kérdésben
 cat("<div style='text-align: right;border-bottom: 1px solid black; width: 40%;margin-left:auto; margin-right:0'>Az egyetlen mód, hogy érthetővé tegyük a frekventista eljárásokat az, ha hazudunk róluk.</div><div style='text-align: right; width:40%;margin-left:auto;margin-right:0'><i>Frank Harrell</i></div><br>")
 ```
 
-Először kezdjük gyorsan egy terminológiai kérdéssel: amit korábban többször is úgy hívtam, hogy "maximum likelihood jellegű" megközelítés, az hivatalos nevén a **frekventista** megközelítés. Ha valaki arra asszociál, hogy ilyenről már volt szó, a valószínűség interpretációi kapcsán (\@ref(valinterpretacio). alfejezet), akkor hamar ki fog derülni, hogy ez egyáltalán nem véletlen.
+Először kezdjük gyorsan egy terminológiai kérdéssel: amit korábban többször is úgy hívtam, hogy "maximum likelihood jellegű" megközelítés, az hivatalos nevén a **frekventista** megközelítés. Ha valaki arra asszociál, hogy ilyenről már volt szó, a valószínűség interpretációi kapcsán ([-@sec-valinterpretacio]. alfejezet), akkor hamar ki fog derülni, hogy ez egyáltalán nem véletlen.
 
 Ahogy a korábbiakból is kiderült, a frekventista hozzáállás legfontosabb komponense két szóban összefoglalható: *fordított logika*. Nem azt nézzük, hogy feltéve a mintát mit tudunk mondani valami ismeretlen dologról, hanem azt, hogy feltéve az ismeretlen dolgot, mit tudunk mondani a mintáról. *Ez minden frekventista eljárás sajátja!*
 

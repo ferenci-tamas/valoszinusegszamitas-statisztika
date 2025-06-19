@@ -58,7 +58,7 @@ Nagyon fontos volt az a kifejezés, hogy "Kolmogorov azt mondta": ezek a követe
 
 Semmi másra nincs tehát szükségünk, ebből a háromból axiómából létrehozható a valószínűségszámítás egész építménye.
 
-## A valószínűség interpretációi {#valinterpretacio}
+## A valószínűség interpretációi {#sec-valinterpretacio}
 
 \epigraph{A valószínű az, ami legtöbbször megtörténik.}{\textit{Arisztotelész}}
 
@@ -138,7 +138,7 @@ Helyettesítsük be a függetlenség definícióját a feltételes valószínűs
 
 Ebből az alakból még egy dolog látható rögtön. Ha a $\mathbb{P}\left(A,B\right)=\mathbb{P}\left(A\right)\cdot \mathbb{P}\left(B\right)$ egyenlőség mindkét oldalát $\mathbb{P}\left(B\right)$-vel osztjuk le, akkor kapjuk azt, amivel indítottunk, hogy ti. $\mathbb{P}\left(A \mid B\right)=\mathbb{P}\left(A\right)$. De teljes mértékben jogunkban áll $\mathbb{P}\left(A\right)$-val leosztani, ez esetben azt kapjuk, hogy $\mathbb{P}\left(B \mid A\right)=\mathbb{P}\left(B\right)$. (Ne feledjük, ha egy együttes valószínűséget leosztunk az egyik tag valószínűségével, akkor feltételes valószínűséget kapunk: a másik tag feltételes valószínűségét feltéve azt, amivel leosztottunk.) Tehát a függetlenség $\mathbb{P}\left(A \mid B\right)=\mathbb{P}\left(A\right)$ definíciója *automatikusan* jelenti azt, hogy *szükségképp* egyúttal $\mathbb{P}\left(B \mid A\right)=\mathbb{P}\left(B\right)$ -- azaz a függetlenség valószínűségi fogalma *szimmetrikus*, ha az egyik esemény független a másiktól, akkor a másik is független az egyiktől.
 
-## A Bayes-tétel {#bayesvalszam}
+## A Bayes-tétel {#sec-bayesvalszam}
 
 Egy nagy hírű -- és tényleg rettentő fontos -- tétel fog következni, ami azonban grandiózussága ellenére valójában pofon egyszerűen kihozható, tulajdonképpen csak a feltételes valószínűség definícióját kell kétszer alkalmazni. Egyfelől ugye azt mondtuk, hogy $\mathbb{P}\left(A \mid B\right) = \frac{\mathbb{P}\left(A,B\right)}{\mathbb{P}\left(B\right)}$, másrészt azt is megállapítottuk -- persze ugyanebből levezetve! --, hogy $\mathbb{P}\left(A,B\right)=\mathbb{P}\left(B \mid A\right)\cdot \mathbb{P}\left(A\right)$. Tulajdonképpen semmi másra nincs szükségünk, mint hogy összerakjuk a kettőt, a másodikból származó $\mathbb{P}\left(A,B\right)$-t beírjuk az első számlálójába:
 
